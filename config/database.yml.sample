@@ -45,11 +45,3 @@ test:
   pool: 5
   username: s3-photo-uploader
   password:
-
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: s3-photo-uploader_production
-  pool: 5
-  username: s3-photo-uploader
-  password:
