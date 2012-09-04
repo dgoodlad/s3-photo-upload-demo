@@ -1,12 +1,16 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.6'
+gem 'thin', '~> 1.4.1'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem 'pg', "~> 0.14.0"
 
-gem 'pg'
-
+# Dev-only goodies
+group :development do
+  gem 'heroku'
+  gem 'foreman'
+  gem 'pry-rails'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -18,23 +22,8 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+
+  gem "asset_sync", "~> 0.4.2"
 end
-
-
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'
 
 gem "jquery-rails"
