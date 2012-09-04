@@ -33,6 +33,9 @@ GEM
     asset_sync (0.4.2)
       activemodel
       fog
+    bootstrap-sass-rails (2.0.4.3)
+      rails (~> 3.1)
+      sass-rails (~> 3.1)
     builder (3.0.0)
     coderay (1.0.7)
     coffee-rails (3.2.2)
@@ -156,6 +159,7 @@ PLATFORMS
 
 DEPENDENCIES
   asset_sync (~> 0.4.2)
+  bootstrap-sass-rails (~> 2.0.4)
   coffee-rails (~> 3.2.1)
   foreman
   heroku
