@@ -1,3 +1,17 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+previewFile = (file) ->
+  reader = new FileReader()
+  el = $('<div class="span2 thumbnail"><img><div class="caption">' + file.name + '</div></div>')
+  $("#previews").append(el)
+  img = $("img", el)
+  progress = $("progress", el)
+  reader.onload = (e) ->
+    img.attr('src', e.target.result)
+
+  reader.readAsDataURL(file)
+
+handleFileSelect = (e) ->
+  files = e.target.files
+  previewFile(file) for file in files when file.type == "image/jpeg"
+
+$ ->
+  $('#files').bind('change', handleFileSelect)
