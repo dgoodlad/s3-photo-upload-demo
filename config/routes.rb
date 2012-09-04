@@ -1,4 +1,5 @@
 S3PhotoUploader::Application.routes.draw do
+  root :to => 'photo_upload#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
