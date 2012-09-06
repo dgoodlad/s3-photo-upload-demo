@@ -32,7 +32,13 @@ class PhotoRequest
   end
 
   def presigned_post
-    AWS::S3::PresignedPost.new(bucket, :key => key, :secure => false)
+    AWS::S3::PresignedPost.new(
+      bucket,
+      :key => key,
+      :secure => false,
+      :content_type => "image/jpeg",
+      :acl => "public-read"
+    )
   end
 
   def form_fields
