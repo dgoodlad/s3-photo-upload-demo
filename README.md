@@ -6,6 +6,10 @@ _Disclaimer_ I don't claim this is pretty code - it's just a prototype/demo of a
 
 The AWS credentials used to upload to S3 are never exposed to the client-side, but the image data never has to be sent to the server. The client-side code makes a request to `/sign` which takes the requested username and filename, and returns a set of form fields, including a base64-encoded policy and a signature. These values are then used on the client-side when uploading the file.
 
+## Live Demo
+
+A demo is, at the time of this writing, available at http://s3-photo-upload-demo.throwawayapp.com/
+
 ## Server-Side
 
 The interesting bits are:
