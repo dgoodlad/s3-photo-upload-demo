@@ -33,6 +33,11 @@ GEM
     asset_sync (0.4.2)
       activemodel
       fog
+    aws-sdk (1.6.5)
+      httparty (~> 0.7)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
+      uuidtools (~> 2.1)
     bootstrap-sass-rails (2.0.4.3)
       rails (~> 3.1)
       sass-rails (~> 3.1)
@@ -73,6 +78,9 @@ GEM
     heroku-api (0.2.13)
       excon (~> 0.15.4)
     hike (1.2.1)
+    httparty (0.8.3)
+      multi_json (~> 1.0)
+      multi_xml
     i18n (0.6.1)
     journey (1.0.4)
     jquery-rails (2.1.1)
@@ -88,6 +96,7 @@ GEM
     method_source (0.8)
     mime-types (1.19)
     multi_json (1.3.6)
+    multi_xml (0.5.1)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-ssh (2.5.2)
@@ -153,12 +162,14 @@ GEM
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    uuidtools (2.1.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   asset_sync (~> 0.4.2)
+  aws-sdk
   bootstrap-sass-rails (~> 2.0.4)
   coffee-rails (~> 3.2.1)
   foreman

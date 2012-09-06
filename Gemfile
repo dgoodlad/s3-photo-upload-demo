@@ -29,3 +29,5 @@ group :assets do
 end
 
 gem "jquery-rails"
+
+gem "aws-sdk"
