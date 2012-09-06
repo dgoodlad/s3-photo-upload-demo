@@ -17,7 +17,7 @@ uploadFile = (file) ->
     fd = new FormData()
     fd.append(key, value) for key, value of json.fields
     fd.append('file', file)
-    console.log fd
+    console.log "Uploading #{file.name}"
     request = $.ajax(
       url: json.url,
       type: "POST",
@@ -28,8 +28,7 @@ uploadFile = (file) ->
     )
     request.done (data) ->
       console.log request
-      console.log data
-      console.log json.url
+      console.log "#{json.url}#{json.fields.key}"
 
 uploadFiles = (files) ->
   uploadFile(file) for file in files when file.type == "image/jpeg"
