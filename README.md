@@ -17,3 +17,21 @@ The interesting bits are:
 
 All of the client-side code is in `app/assets/javascripts/photo_upload.js.coffee`.
 
+## Hacking
+
+The easiest way to get this running locally:
+
+```sh
+cp dot-env.example .env
+cp config/database.yml.sample config/database.yml
+
+vim .env 
+vim config/database.yml
+
+rake db:create
+
+# Start the server
+foreman start -p 3000
+```
+
+Now navigate to `http://localhost:3000/` and you should be set to play.
