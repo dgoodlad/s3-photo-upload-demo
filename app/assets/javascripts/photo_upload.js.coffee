@@ -1,6 +1,6 @@
 previewFile = (file) ->
   reader = new FileReader()
-  el = $('<div class="span2 thumbnail"><img><div class="caption"><h3>' + file.name + '</h3><p></p></div></div>')
+  el = $('<li class="span3"><div class="thumbnail"><a href="#"><img class="img-rounded"></a><div class="caption"><h3>' + file.name + '</h3><p></p></div></div></li>')
   $("#previews").append(el)
   img = $("img", el)
   progress = $("progress", el)

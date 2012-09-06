@@ -1,8 +1,17 @@
-<div class="row-fluid">
-  <form>
+<div class="span4">
+  <p>
+    Use the file input, below, to test uploading a few images directly to
+    S3. Either click the button to choose one or more files (multi-select
+    is enabled), or try dropping some files on it.
+  </p>
+  <form class="well">
+    <legend>
     <input type="file" id="files" name="files" multiple>
   </form>
 </div>
 
-<div id="previews" class="row-fluid">
+<div class="span8">
+  <ul id="previews" class="thumbnails">
+  </ul>
 </div>
+
