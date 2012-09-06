@@ -37,6 +37,7 @@ class PhotoRequest
       :key => key,
       :secure => Rails.env.production?,
       :content_type => "image/jpeg",
+      :content_length => 1..(3.megabytes),
       :acl => "public-read"
     )
   end

@@ -23,27 +23,31 @@ handleUploadProgress = (file, el, event) ->
       .text("#{percent}% uploaded")
 
 uploadFile = (file, el) ->
-  getFormFieldsFor(file).success (json) ->
-    fd = new FormData()
-    fd.append(key, value) for key, value of json.fields
-    fd.append('file', file)
-    $(".caption p", el).text "Starting upload..."
-    xhr = new XMLHttpRequest()
-    xhr.upload.addEventListener "progress", ((e) -> handleUploadProgress(file, el, e)), false
-    xhr.addEventListener "load", (e) ->
-      if xhr.status == 204
-        $(".progress", el)
-          .removeClass("active")
-          .removeClass("progress-striped")
-          .addClass("progress-success")
-        $(".caption p", el)
-          .text("Upload complete! ")
-          .append($("<a href=\"#{json.url + json.fields.key}\">View on S3</a>"))
-      else
-        $(".caption p", el)
-          .text("Upload failed ☹")
-    xhr.open "POST", json.url, true
-    xhr.send(fd)
+  if file.size > (3 * 1024 * 1024)
+    $(".caption p", el)
+      .text("Sorry, file's too big!")
+  else
+    getFormFieldsFor(file).success (json) ->
+      fd = new FormData()
+      fd.append(key, value) for key, value of json.fields
+      fd.append('file', file)
+      $(".caption p", el).text "Starting upload..."
+      xhr = new XMLHttpRequest()
+      xhr.upload.addEventListener "progress", ((e) -> handleUploadProgress(file, el, e)), false
+      xhr.addEventListener "load", (e) ->
+        if xhr.status == 204
+          $(".progress", el)
+            .removeClass("active")
+            .removeClass("progress-striped")
+            .addClass("progress-success")
+          $(".caption p", el)
+            .text("Upload complete! ")
+            .append($("<a href=\"#{json.url + json.fields.key}\">View on S3</a>"))
+        else
+          $(".caption p", el)
+            .text("Upload failed ☹")
+      xhr.open "POST", json.url, true
+      xhr.send(fd)
 
 handleFileSelect = (e) ->
   files = e.target.files
