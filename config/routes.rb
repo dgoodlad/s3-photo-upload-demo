@@ -1,5 +1,6 @@
 S3PhotoUploader::Application.routes.draw do
   root :to => 'photo_upload#index'
+  match 'sign' => 'photo_upload#sign', :as => :sign
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

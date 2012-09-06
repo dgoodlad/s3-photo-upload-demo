@@ -17,6 +17,8 @@ class PhotoRequest
   end
 
   def initialize(username, filename)
+    raise ArgumentError unless username.present?
+    raise ArgumentError unless filename.present?
     @username = username
     @filename = filename
   end
@@ -30,10 +32,15 @@ class PhotoRequest
   end
 
   def presigned_post
-    AWS::S3::PresignedPost.new(bucket, :key => key)
+    AWS::S3::PresignedPost.new(bucket, :key => key, :secure => false)
   end
 
   def form_fields
     presigned_post.fields
   end
+
+  def url
+    presigned_post.url
+  end
+
 end
