@@ -35,7 +35,7 @@ class PhotoRequest
     AWS::S3::PresignedPost.new(
       bucket,
       :key => key,
-      :secure => false,
+      :secure => Rails.production?,
       :content_type => "image/jpeg",
       :acl => "public-read"
     )
