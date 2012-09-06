@@ -1,6 +1,6 @@
 previewFile = (file) ->
   reader = new FileReader()
-  el = $('<li class="span3"><div class="thumbnail"><a href="#"><img class="img-rounded"></a><div class="caption"><h3>' + file.name + '</h3><p></p></div></div></li>')
+  el = $('<li class="span3"><div class="thumbnail"><a href="#"><img class="img-rounded"></a><div class="caption"><h3>' + file.name + '</h3><div class="progress progress-striped"><div class="bar" style="width: 0%;"></div></div><p></p></div></div></li>')
   $("#previews").append(el)
   img = $("img", el)
   progress = $("progress", el)
@@ -15,6 +15,10 @@ getFormFieldsFor = (file) ->
 handleUploadProgress = (file, el, event) ->
   if event.lengthComputable
     percent = Math.floor((event.loaded / event.total) * 100)
+    $(".progress", el)
+      .toggleClass("active", true)
+    $(".bar", el)
+      .css("width": "#{percent}%")
     $(".caption p", el)
       .text("#{percent}% uploaded")
 
@@ -28,6 +32,10 @@ uploadFile = (file, el) ->
     xhr.upload.addEventListener "progress", ((e) -> handleUploadProgress(file, el, e)), false
     xhr.addEventListener "load", (e) ->
       if xhr.status == 204
+        $(".progress", el)
+          .removeClass("active")
+          .removeClass("progress-striped")
+          .addClass("progress-success")
         $(".caption p", el)
           .text("Upload complete! ")
           .append($("<a href=\"#{json.url + json.fields.key}\">View on S3</a>"))
