@@ -1,5 +1,5 @@
 (function() {
-  var getFormFieldsFor, handleFileSelect, handleUploadProgress, previewFile, uploadFile;
+  var displayUploadProgress, getFormFieldsFor, handleFileSelect, previewFile, uploadFile;
 
   previewFile = function(file) {
     var el, img, progress, reader;
@@ -22,7 +22,7 @@
     });
   };
 
-  handleUploadProgress = function(file, el, event) {
+  displayUploadProgress = function(el, event) {
     var percent;
     if (event.lengthComputable) {
       percent = Math.floor((event.loaded / event.total) * 100);
@@ -50,7 +50,7 @@
         $(".caption p", el).text("Starting upload...");
         xhr = new XMLHttpRequest();
         xhr.upload.addEventListener("progress", (function(e) {
-          return handleUploadProgress(file, el, e);
+          return displayUploadProgress(el, e);
         }), false);
         xhr.addEventListener("load", function(e) {
           if (xhr.status === 204) {

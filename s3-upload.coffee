@@ -12,7 +12,7 @@ previewFile = (file) ->
 getFormFieldsFor = (file) ->
   $.getJSON "/sign", { username: "demo", filename: file.name }
 
-handleUploadProgress = (file, el, event) ->
+displayUploadProgress = (el, event) ->
   if event.lengthComputable
     percent = Math.floor((event.loaded / event.total) * 100)
     $(".progress", el)
@@ -33,7 +33,7 @@ uploadFile = (file, el) ->
       fd.append('file', file)
       $(".caption p", el).text "Starting upload..."
       xhr = new XMLHttpRequest()
-      xhr.upload.addEventListener "progress", ((e) -> handleUploadProgress(file, el, e)), false
+      xhr.upload.addEventListener "progress", ((e) -> displayUploadProgress(el, e)), false
       xhr.addEventListener "load", (e) ->
         if xhr.status == 204
           $(".progress", el)
