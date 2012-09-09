@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'json'
 require 'aws'
 
 configure do
@@ -13,15 +14,15 @@ get '/' do
   erb :index
 end
 
-post '/sign' do
+get '/sign' do
   if params[:username] && params[:filename]
     key = "#{params[:username]}/#{params[:filename]}"
     presigned_post = AWS::S3::PresignedPost.new(
-      settings(:aws_bucket),
+      settings.aws_bucket,
       :key => key,
       :secure => production?,
       :content_type => "image/jpeg",
-      :content_length => 1..(3.megabytes),
+      :content_length => 1..(3 * 1024 * 1024),
       :acl => "public-read"
     )
     Rack::Response.new(
