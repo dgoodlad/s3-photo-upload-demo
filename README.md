@@ -32,7 +32,7 @@ These values tell the client-side where to post to, and what multipart-encoded f
 
 ## Client-side
 
-All of the client-side code is in `s3-upload.coffee` (which generates `public/s3-upload.js`).
+All of the client-side code is in `s3-upload.coffee` (which generates `public/s3-upload.js`). It's written to be very procedural, keeping the interesting bits together. Unless you're writing something trivial, I wouldn't use this code as-is in a real application: it's just a demonstration.
 
 ## Hacking
 
