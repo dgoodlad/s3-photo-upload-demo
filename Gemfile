@@ -8,6 +8,9 @@ group :development do
   gem 'heroku'
   gem 'foreman'
   gem 'pry'
+
+  gem 'therubyracer'
+  gem 'coffee-script'
 end
 
 gem "aws-sdk"
