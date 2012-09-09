@@ -1,7 +1,11 @@
 #!/usr/bin/env rake
-# Add your own tasks in files placed in lib/tasks ending in .rake,
-# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
-require File.expand_path('../config/application', __FILE__)
+require 'coffee-script'
 
-S3PhotoUploader::Application.load_tasks
+namespace :assets do
+  task :compile do
+    File.open(File.join(File.dirname(__FILE__), "public/s3-upload.js"), "w") do |f|
+      f << CoffeeScript.compile(File.read(File.join(File.dirname(__FILE__), "s3-upload.coffee")))
+    end
+  end
+end
