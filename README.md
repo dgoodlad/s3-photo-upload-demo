@@ -12,14 +12,27 @@ A demo is, at the time of this writing, available at http://s3-photo-upload-demo
 
 ## Server-Side
 
-The interesting bits are:
+The server side is very straightforward (all in `app.rb`). `/sign` takes a username/filename combination (username is hardcoded to 'demo' atm) and returns some JSON:
 
-* `app/models/photo_request.rb` -- Handles request pre-signing, keeping credentials private on the server-side
-* `app/controllers/photo_upload_controller.rb` -- The main entry point to the server-side
+```json
+{
+  "url": "http://my-bucket-name.s3.amazonaws.com/",
+  "fields": {
+    "AWSAccessKeyId": "AKIAI6C4JGWHT2C5PGLQ",
+    "key": "demo/oversize.jpg",
+    "policy":"eyJleHBpcmF0aW9uIj[...]",
+    "signature":"Q0qlCXilt4dc[...]",
+    "Content-Type":"image/jpeg",
+    "acl":"public-read"
+  }
+}
+```
+
+These values tell the client-side where to post to, and what multipart-encoded fields to include in order to make a successful request to S3. I've used the official AWS gem to generate these values for simplicity, but it's not a hard problem to generate the policy and signature on your own if you'd like. The policy looks like gibberish but is just base64-encoded json, so I recommend having a closer look at it to fully understand what's being generated.
 
 ## Client-side
 
-All of the client-side code is in `app/assets/javascripts/photo_upload.js.coffee`.
+All of the client-side code is in `s3-upload.coffee` (which generates `public/s3-upload.js`).
 
 ## Hacking
 
@@ -27,15 +40,11 @@ The easiest way to get this running locally:
 
 ```sh
 cp dot-env.example .env
-cp config/database.yml.sample config/database.yml
-
-vim .env 
-vim config/database.yml
-
-rake db:create
-
+vim .env
 # Start the server
 foreman start -p 3000
 ```
 
 Now navigate to `http://localhost:3000/` and you should be set to play.
+
+If you're changing the coffeescript, make sure you run `rake assets:compile` afterwards to generate the javascript. This will become annoying if you're making serious changes, in which case I'd recommend setting up Guard or using the official coffeescript compiler's `-w` flag to continuously recompile it.
