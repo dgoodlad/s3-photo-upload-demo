@@ -34,6 +34,23 @@ These values tell the client-side where to post to, and what multipart-encoded f
 
 All of the client-side code is in `s3-upload.coffee` (which generates `public/s3-upload.js`). It's written to be very procedural, keeping the interesting bits together. Unless you're writing something trivial, I wouldn't use this code as-is in a real application: it's just a demonstration.
 
+## S3 CORS Configuration
+
+This requires CORS to be configured on your S3 bucket. For the demo, I used the following, including an entry that allows requests from both my local dev environment and the demo app server:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+    <CORSRule>
+        <AllowedOrigin>http://s3-photo-upload-demo.throwawayapp.com</AllowedOrigin>
+        <AllowedOrigin>http://localhost:3000</AllowedOrigin>
+        <AllowedMethod>POST</AllowedMethod>
+        <MaxAgeSeconds>3000</MaxAgeSeconds>
+        <AllowedHeader>*</AllowedHeader>
+    </CORSRule>
+</CORSConfiguration>
+```
+
 ## Hacking
 
 The easiest way to get this running locally:
